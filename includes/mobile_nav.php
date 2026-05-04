@@ -1,0 +1,42 @@
+<!-- Mobile Bottom Navigation Container -->
+<div class="md:hidden">
+    <!-- Added rounded-t-[10px] for the 10px top radius -->
+    <div class="fixed bottom-0 left-0 z-50 w-full h-16 bg-green-600 border-t border-green-700 rounded-t-[10px] overflow-hidden shadow-[0_-10px_25px_rgba(22,163,74,0.4)]">
+        <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
+            <!-- Home -->
+            <a href="index.php" class="inline-flex flex-col items-center justify-center px-5 hover:bg-green-700 transition-colors group">
+                <svg class="w-6 h-6 mb-1 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                <span class="text-[10px] text-white uppercase tracking-wider">Home</span>
+            </a>
+
+            <!-- Cat 1 -->
+            <a href="category1.php" class="inline-flex flex-col items-center justify-center px-5 hover:bg-green-700 transition-colors group">
+                <svg class="w-6 h-6 mb-1 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+                <span class="text-[10px] text-white uppercase tracking-wider">Cat 1</span>
+            </a>
+
+            <!-- Cat 2 -->
+            <a href="category2.php" class="inline-flex flex-col items-center justify-center px-5 hover:bg-green-700 transition-colors group">
+                <svg class="w-6 h-6 mb-1 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+                <span class="text-[10px] text-white uppercase tracking-wider">Cat 2</span>
+            </a>
+
+            <!-- Account -->
+            <a href="account.php" class="inline-flex flex-col items-center justify-center px-5 hover:bg-green-700 transition-colors group">
+                <svg class="w-6 h-6 mb-1 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                <span class="text-[10px] text-white uppercase tracking-wider">Account</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- SPACER -->
+    <div class="h-16 w-full bg-transparent" aria-hidden="true"></div>
+</div>

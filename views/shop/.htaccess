@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /aushadhi-platform/views/shop/
+
+# 1. Do not rewrite if it's an actual file (like images/js/css)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# 2. Map 'product/slug' to 'product.php?pid=slug'
+RewriteRule ^product/([^/]+)/?$ product.php?pid=$1 [L,QSA]

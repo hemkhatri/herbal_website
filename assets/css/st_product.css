@@ -1,0 +1,129 @@
+:root {
+    --brand-green: #2D4030;
+    --brand-gold: #C5A059;
+}
+
+body {
+    background: #FDFCF9;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+.luxury-font {
+    font-family: 'Playfair Display', serif;
+}
+
+/* IMAGE BOX */
+.zoom-area {
+    width: 100%;
+    max-width: 650px;
+    height: 650px;
+    background: white;
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media(max-width:768px) {
+    .zoom-area {
+        height: 400px;
+    }
+
+    #zoom-result {
+        display: none !important;
+    }
+}
+
+.slider-frame {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    transition: all .5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    opacity: 0;
+}
+
+.slide-active {
+    opacity: 1;
+    z-index: 10;
+}
+
+/* ZOOM SYSTEM */
+#zoom-lens {
+    position: absolute;
+    width: 180px;
+    height: 108px;
+    background: rgba(45, 64, 48, 0.1);
+    border: 1px solid var(--brand-green);
+    display: none;
+    pointer-events: none;
+    z-index: 20;
+}
+
+#zoom-result {
+    position: absolute;
+    left: calc(100% + 40px);
+    top: 0;
+    width: 600px;
+    height: 400px;
+    border-radius: 20px;
+    background: white;
+    border: 1px solid #eee;
+    background-repeat: no-repeat;
+    display: none;
+    z-index: 100;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* DESCRIPTION TOGGLE */
+#desc-content {
+    max-height: 250px;
+    overflow: hidden;
+    transition: max-height 0.8s ease-in-out;
+    position: relative;
+}
+
+#desc-content.expanded {
+    max-height: 10000px;
+}
+
+#desc-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(transparent, #FDFCF9);
+    transition: opacity 0.3s;
+}
+
+#desc-content.expanded #desc-gradient {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #ddd;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.dot.active {
+    width: 22px;
+    background: var(--brand-green);
+}
