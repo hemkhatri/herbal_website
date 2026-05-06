@@ -94,13 +94,19 @@
 
 <!-- LOGIN POPUP OVERLAY -->
 <div id="login-overlay" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-    <div id="login-card" class="relative w-full max-w-md bg-white dark:bg-[#0d1117] rounded-[25px] shadow-2xl overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
-        <button onclick="toggleLogin()" class="absolute top-4 right-4 z-20 p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-gray-200 transition-colors">
-            <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    
+    <div id="login-card" class="relative w-full max-w-md bg-white rounded-[25px] shadow-2xl overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
+        
+        <!-- Close Button -->
+        <button onclick="toggleLogin()" class="absolute top-4 right-4 z-20 p-2 bg-gray-100 rounded-full hover:bg-gray-200">
+            ✕
         </button>
-        <div class="h-[550px] w-full">
-            <iframe src="../auth/login.php" class="w-full h-full border-none"></iframe>
+
+        <!-- Dynamic Content -->
+        <div id="login-content" class="p-6">
+            <!-- Loaded via JS -->
         </div>
+
     </div>
 </div>
 
@@ -185,6 +191,27 @@ function toggleSearch() {
     overlay.classList.toggle('translate-x-full', isOpen);
     if (!isOpen) setTimeout(() => input.focus(), 300);
 }
+async function loadLoginForm() {
+    const container = document.getElementById('login-content');
+
+    container.innerHTML = "<p class='text-center text-gray-400'>Loading...</p>";
+
+    try {
+        const res = await fetch('../views/auth/login_form.php');
+
+        if (!res.ok) throw new Error("Network error");
+
+        const html = await res.text();
+        container.innerHTML = html;
+
+    } catch (err) {
+        container.innerHTML = `
+            <div class="text-center text-red-500">
+                Failed to load login. Check server.
+            </div>
+        `;
+    }
+}
 
 function toggleLogin() {
     const overlay = document.getElementById('login-overlay');
@@ -193,21 +220,29 @@ function toggleLogin() {
 
     if (isHidden) {
         overlay.classList.remove('hidden');
+
         setTimeout(() => {
             card.classList.remove('scale-95', 'opacity-0');
             card.classList.add('scale-100', 'opacity-100');
         }, 10);
+
+        loadLoginForm(); // 🔥 load dynamically
+
     } else {
         card.classList.remove('scale-100', 'opacity-100');
         card.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => overlay.classList.add('hidden'), 300);
+
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+            document.getElementById('login-content').innerHTML = ""; // clear
+        }, 300);
     }
 }
 
-// Global click handler to close popup when clicking outside card
+// Close when clicking outside
 window.addEventListener('click', function(e) {
-    const loginOverlay = document.getElementById('login-overlay');
-    if (e.target == loginOverlay) {
+    const overlay = document.getElementById('login-overlay');
+    if (e.target === overlay) {
         toggleLogin();
     }
 });
