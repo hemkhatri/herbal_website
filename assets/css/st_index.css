@@ -104,3 +104,14 @@
 .snap-start { 
     scroll-snap-align: start; 
 }
+
+
+.dark .announcement-bar {
+    background-color: #1c2d46 !important; /* Deep dark background */
+    border-color: #30363d;     /* VS Code border color */
+}
+
+/* Ensure the spans inside the bar specifically turn a bright color */
+.dark .announcement-bar span {
+    color: #a8ffca !important; /* VS Code Green for high visibility */
+}

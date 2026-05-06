@@ -1,68 +1,68 @@
-<div>
-    <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
+<?php
+session_start(); // <--- ADD THIS LINE HERE!
 
-    <form id="login-form" class="space-y-4">
-        <input 
-            type="email" 
-            name="email" 
-            placeholder="Email" 
-            required
-            class="w-full border p-3 rounded-lg"
-        >
+// login_form.php
+require_once __DIR__ . '/../../includes/db.php'; 
 
-        <input 
-            type="password" 
-            name="password" 
-            placeholder="Password" 
-            required
-            class="w-full border p-3 rounded-lg"
-        >
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+    
+    // Now this will actually save the email for login.php to see
+    $_SESSION['auth_email'] = $email; 
 
-        <button 
-            type="submit"
-            class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700"
-        >
-            Login
-        </button>
-
-        <p id="login-error" class="text-red-500 text-sm text-center"></p>
-    </form>
-</div>
-
-<script>
-document.getElementById('login-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const form = e.target;
-    const errorBox = document.getElementById('login-error');
-
-    errorBox.innerText = "Logging in...";
-
-    const formData = new FormData(form);
+    if (!isset($pdo)) {
+        die("Database connection variable \$pdo not found.");
+    }
 
     try {
-        const res = await fetch('../../auth/login-process.php', {
-            method: 'POST',
-            body: formData
-        });
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? LIMIT 1");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
 
-        const data = await res.json();
-
-        if (data.success) {
-            errorBox.classList.remove('text-red-500');
-            errorBox.classList.add('text-green-600');
-            errorBox.innerText = "Login successful!";
-
-            setTimeout(() => {
-                location.reload(); // or update UI dynamically
-            }, 1000);
-
+        if ($user) {
+            echo "/aushadhi-platform/views/auth/login.php";
         } else {
-            errorBox.innerText = data.message;
+            echo "/aushadhi-platform/views/auth/signup.php";
         }
-
-    } catch (err) {
-        errorBox.innerText = "Server error. Try again.";
+        exit;
+    } catch (PDOException $e) {
+        die("Error: " . $e->getMessage());
     }
-});
+}
+?>
+
+
+
+<form id="email-check-form" class="space-y-4" onsubmit="handleEmailCheck(event)">
+    <h2 class="text-2xl font-bold text-center mb-4 font-logo">Continue with Email</h2>
+    <input type="email" name="email" required class="w-full px-4 py-2 border rounded-xl" placeholder="name@example.com">
+    <button type="submit" class="w-full bg-[#0d1117] text-white py-3 rounded-xl">Continue</button>
+</form>
+
+<script>
+    window.handleEmailCheck = async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        try {
+            const response = await fetch('/aushadhi-platform/views/auth/login_form.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.text();
+            const cleanUrl = result.trim();
+
+            // FIX: If the response contains '.php', it's a valid redirect
+            if (cleanUrl.includes('.php')) {
+                window.location.href = cleanUrl;
+            } else {
+                // Only alert if it's a real error (like a database crash)
+                alert("System Message: " + cleanUrl);
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+        }
+    };
+
 </script>

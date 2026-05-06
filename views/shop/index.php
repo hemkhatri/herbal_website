@@ -31,7 +31,7 @@ $bestsellers = $bestStmt->fetchAll();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Instrument+Sans&family=Playfair+Display&family=Yatra+One&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans&family=Playfair+Display&family=Yatra+One&family=Cormorant+Garamond&display=swap"
         rel="stylesheet">
 
     <!-- ⚠️ KEEP CDN for now (but compile later) -->
@@ -39,13 +39,14 @@ $bestsellers = $bestStmt->fetchAll();
 
     <script>
         tailwind.config = {
-            darkMode: 'class',
+            darkMode: 'selector',
             theme: {
                 extend: {
                     fontFamily: {
                         'sans': ['"Instrument Sans"', 'sans-serif'],
                         'display': ['"Playfair Display"', 'serif'],
                         'yatra': ['"Yatra One"', 'system-ui'],
+                        'logo': ['"Cormorant Garamond"', 'sans-serif'],
                     }
                 }
             }
@@ -73,13 +74,14 @@ $bestsellers = $bestStmt->fetchAll();
     </div>>
 
     <!-- Hero Slider -->
-    <div class="relative w-full overflow-hidden bg-white transition-colors duration-300">
+    <div class="relative w-full overflow-hidden rounded-[23px] isolate bg-white transition-colors duration-300 ">
         <div id="slider-container" class="relative w-full h-[350px] md:h-[400px]">
             <div id="slider" class="flex transition-transform duration-700 ease-in-out h-full">
                 <?php if ($slideCount > 0): ?>
                     <?php foreach ($slides as $slide): ?>
                         <a href="<?php echo htmlspecialchars($slide['link_url']); ?>"
-                            class="slide-item block h-full shrink-0 w-full">
+                            class="slide-item block h-full shrink-0 w-full rounded-[23px] overflow-hidden">
+
                             <picture class="w-full h-full">
                                 <!-- Desktop Image -->
                                 <source media="(min-width: 768px)"
@@ -110,14 +112,11 @@ $bestsellers = $bestStmt->fetchAll();
     </div>
     <!-- Announcement Ticker -->
     <div
-        class="w-full bg-white text-black py-3 mt-2 overflow-hidden whitespace-nowrap select-none border-y border-gray-100 transition-colors duration-300">
+        class="announcement-bar w-full bg-green-100 dark:bg-transparent text-black py-3 mt-2 overflow-hidden whitespace-nowrap select-none border-y border-gray-100 transition-colors duration-300">
+
         <div class="inline-block animate-marquee pause-on-hover">
-            <span class="px-4 text-sm font-medium">✨ Get 20% Off on your first order! Use code: FIRST20</span>
-            <span class="px-4 text-sm font-medium">🚚 Free delivery on orders above Rs. 500!</span>
-            <span class="px-4 text-sm font-medium">💊 Authentic Medicines delivered to your doorstep.</span>
-            <span class="px-4 text-sm font-medium">✨ Get 20% Off on your first order! Use code: FIRST20</span>
-            <span class="px-4 text-sm font-medium">🚚 Free delivery on orders above Rs. 500!</span>
-            <span class="px-4 text-sm font-medium">💊 Authentic Medicines delivered to your doorstep.</span>
+            <span class="px-4 text-sm font-sans">✨ Get 20% Off    Hello Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, possimus odio. Perspiciatis velit, eos earum ex neque excepturi voluptates accusamus iure sed aperiam alias illo at quaerat id, dolorum veniam?</span>
+            <span class="px-4 text-sm font-sans">✨ Get 20% Off    Hello Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, possimus odio. Perspiciatis velit, eos earum ex neque excepturi voluptates accusamus iure sed aperiam alias illo at quaerat id, dolorum veniam?</span>
         </div>
     </div>
 
