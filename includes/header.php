@@ -104,12 +104,78 @@
                 </a>
 
                 <!-- Account Icon Button -->
-                <button onclick="toggleLogin()" class="p-2 text-gray-600 hover:text-green-600 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>
-                </button>
+                <?php if (isset($_SESSION['user_id'])):
+                    // Logic for initials
+                    $name = $_SESSION['user_name'] ?? 'User';
+                    $words = explode(" ", $name);
+                    $initials = strtoupper(substr($words[0], 0, 1) . (isset($words[1]) ? substr($words[1], 0, 1) : ''));
+                    ?>
+                    <div class="relative">
+                        <!-- TRIGGER: Profile Circle -->
+                        <button onclick="toggleUserMenu()" class="flex items-center focus:outline-none">
+                            <?php if (!empty($_SESSION['user_photo'])): ?>
+                                <img src="<?= htmlspecialchars($_SESSION['user_photo']) ?>"
+                                    class="w-9 h-9 rounded-full object-cover border border-gray-200 hover:border-green-500 transition-all">
+                            <?php else: ?>
+                                <div
+                                    class="w-9 h-9 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-sm font-bold border border-green-200 hover:bg-green-200 transition-all">
+                                    <?= $initials ?>
+                                </div>
+                            <?php endif; ?>
+                        </button>
+
+                        <!-- DROPDOWN MENU -->
+                        <div id="userMenu"
+                            class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50">
+                            <div class="px-4 py-2 border-b border-gray-50 mb-1">
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Account</p>
+                                <p class="text-sm font-medium text-gray-800 truncate"><?= htmlspecialchars($name) ?></p>
+                            </div>
+
+                            <a href="../user/profile.php"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors">My
+                                Profile</a>
+                            <a href="orders.php"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors">My
+                                Orders</a>
+                            <a href="settings.php"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors">Settings</a>
+
+                            <hr class="my-1 border-gray-100">
+
+                            <a href="../auth/logout.php"
+                                class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">Logout</a>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <!-- Your existing Login button logic -->
+                    <!-- LOGIN ICON (NOT LOGGED IN) -->
+                    <button onclick="toggleLogin()" class="p-2 text-gray-600 hover:text-green-600 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </button>
+                <?php endif; ?>
+
+                <script>
+                    function toggleUserMenu() {
+                        const menu = document.getElementById('userMenu');
+                        menu.classList.toggle('hidden');
+                    }
+
+                    // Close menu if user clicks outside
+                    window.addEventListener('click', function (e) {
+                        const menu = document.getElementById('userMenu');
+                        const button = menu.previousElementSibling;
+                        if (!button.contains(e.target) && !menu.contains(e.target)) {
+                            menu.classList.add('hidden');
+                        }
+                    });
+                </script>
+
+
+
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../../includes/db.php';
+require 'includes/db.php';
 
 // 🚀 LIMIT DATA (CRITICAL)
 $stmt = $pdo->prepare("SELECT * FROM hero_slides ORDER BY sort_order ASC LIMIT 5");
@@ -54,12 +54,12 @@ $bestsellers = $bestStmt->fetchAll();
     </script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-    <link rel="stylesheet" href="../../assets/css/st_index.css">
+    <link rel="stylesheet" href="assets/css/st_index.css">
 </head>
 
 <body class="font-sans bg-white transition-colors duration-300">
     <?php
-    include '../../includes/header.php';
+    include 'includes/header.php';
     ?>
 
     <!-- Mobile Search Bar Trigger -->
@@ -400,7 +400,7 @@ $bestsellers = $bestStmt->fetchAll();
 
             <!-- Video Element -->
             <video preload="none" autoplay muted loop playsinline class="w-full h-full object-cover">
-                <source src="../../storage/videos/family.mp4" type="video/mp4">
+                <source src="storage/videos/family.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
 
@@ -416,9 +416,9 @@ $bestsellers = $bestStmt->fetchAll();
 
 
 
-    <?php include '../../includes/footer.php'; ?>
-    <?php include '../../includes/mobile_nav.php'; ?>
-    <script src="../../assets/js/js_index.js" defer></script>
+    <?php include 'includes/footer.php'; ?>
+    <?php include 'includes/mobile_nav.php'; ?>
+    <script src="assets/js/js_index.js" defer></script>
 </body>
 
 </html>
