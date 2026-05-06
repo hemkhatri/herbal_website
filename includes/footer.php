@@ -2,23 +2,24 @@
 <div class="relative w-full">
     <!-- Skyline Image Section -->
     <div class="w-full skyline-container transition-colors duration-300">
-        <img src="/aushadhi-platform/storage/product_images/temple.svg" alt="Kathmandu Skyline"
-            class="w-full block h-auto -mb-[1px] skyline-img transition-all duration-300">
+        <img src="/aushadhi-platform/storage/product_images/temple.svg" alt="Kathmandu Skyline" class="w-full block h-auto -mb-[1px] skyline-img transition-all duration-300 
+                   dark:brightness-0 dark:invert-[.42]">
+        <!-- The filter above makes the SVG match gray-500 in dark mode -->
     </div>
 
-    <!-- Footer: Day (Black Background) | Night (White Background) -->
+    <!-- Footer: Day (Black Background) | Night (Gray-500) -->
     <footer
-        class="bg-black text-white dark:bg-white py-16 md:py-24 px-6 transition-all duration-300 border-t border-transparent dark:border-gray-200">
+        class="bg-black text-white dark:bg-gray-500 py-16 md:py-24 px-6 transition-all duration-300 border-t border-transparent dark:border-gray-200">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16">
             <!-- Brand Section -->
             <div>
-                <!-- Consistent Minimalist Footer Logo -->
                 <h2 class="font-logo text-4xl md:text-5xl lowercase mb-6 tracking-tight">
                     <a href="index.php" class="text-white dark:text-black hover:opacity-80 transition-opacity">
                         aushadhi<span class="text-green-500">.</span>
                     </a>
                 </h2>
 
+                <!-- Improved readability for dark mode text -->
                 <p class="text-gray-400 dark:text-gray-900 max-w-md leading-relaxed">
                     Ethical Himalayan botanicals crafted into modern luxury wellness products.
                 </p>
@@ -26,19 +27,20 @@
 
             <!-- Contact Section -->
             <div class="md:text-right">
-                <p class="uppercase tracking-[0.3em] text-xs md:text-sm text-gray-500 dark:text-gray-700 mb-4">Contact
+                <p class="uppercase tracking-[0.3em] text-xs md:text-sm text-gray-500 dark:text-gray-900 mb-4">Contact
                 </p>
-                <p class="mb-2 italic">Kathmandu, Nepal</p>
-                <p>support@aushadhi.com</p>
+                <p class="mb-2 italic dark:text-black">Kathmandu, Nepal</p>
+                <p class="dark:text-black">support@aushadhi.com</p>
             </div>
         </div>
 
         <!-- Bottom Bar -->
         <div
-            class="max-w-7xl mx-auto border-t border-white/10 dark:border-black/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-8">
-            <p class="text-sm text-gray-500 dark:text-gray-800 order-3 md:order-1">
-                © 2024 Aushadhi Wellness.
+            class="max-w-7xl mx-auto border-t border-white/10 dark:border-black/20 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-8">
+            <p class="text-sm text-gray-500 dark:text-gray-900 order-3 md:order-1">
+                &copy; 2025 - <?php echo date("Y"); ?> Aushadhi Wellness.
             </p>
+
 
             <!-- Social Media Icons -->
             <div class="flex items-center gap-5 order-1 md:order-2">
@@ -61,7 +63,6 @@
             <p class="text-xl md:text-2xl font-bold text-green-600 order-2 md:order-3">नेपालको उपहार</p>
         </div>
 
-        <!-- Space for Mobile Navigation -->
         <div class="h-16 md:hidden"></div>
     </footer>
 </div>

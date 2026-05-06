@@ -225,19 +225,19 @@
         overlay.classList.toggle('translate-x-full', isOpen);
         if (!isOpen) setTimeout(() => input.focus(), 300);
     }
-// Inside your header.php toggle script
-async function loadLoginForm() {
-    const container = document.getElementById('login-content');
-    const res = await fetch('/aushadhi-platform/views/auth/login_form.php');
-    const html = await res.text();
-    
-    // FIX: Using createContextualFragment forces the <script> tags to run
-    const fragment = document.createRange().createContextualFragment(html);
-    container.innerHTML = ""; 
-    container.appendChild(fragment);
-    
-    console.log("Form Loaded and Scripts Activated");
-}
+    // Inside your header.php toggle script
+    async function loadLoginForm() {
+        const container = document.getElementById('login-content');
+        const res = await fetch('/aushadhi-platform/views/auth/login_form.php');
+        const html = await res.text();
+
+        // FIX: Using createContextualFragment forces the <script> tags to run
+        const fragment = document.createRange().createContextualFragment(html);
+        container.innerHTML = "";
+        container.appendChild(fragment);
+
+        console.log("Form Loaded and Scripts Activated");
+    }
 
 
 
@@ -306,5 +306,40 @@ async function loadLoginForm() {
             alert("Something went wrong.Please try again.");
         }
     }
+
+    // This function MUST be global so Google's library can find it
+    window.handleCredentialResponse = function (response) {
+        console.log("Google Token Received, sending to verify...");
+
+        const formData = new FormData();
+        formData.append('credential', response.credential);
+
+        fetch('/aushadhi-platform/views/auth/google_verify.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(async res => {
+                const text = await res.text();
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    console.error("Server sent non-JSON response:", text);
+                    throw new Error("Invalid Server Response");
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    // Success! Redirect to home or account page
+                    window.location.href = "/aushadhi-platform/index.php";
+                } else {
+                    alert("Login Failed: " + data.message);
+                }
+            })
+            .catch(err => {
+                console.error("Verification Error:", err);
+                alert("Verification Error. Please check console.");
+            });
+    }
+
 
 </script>

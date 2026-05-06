@@ -52,6 +52,7 @@ $bestsellers = $bestStmt->fetchAll();
             }
         }
     </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <link rel="stylesheet" href="../../assets/css/st_index.css">
 </head>
@@ -115,8 +116,12 @@ $bestsellers = $bestStmt->fetchAll();
         class="announcement-bar w-full bg-green-100 dark:bg-transparent text-black py-3 mt-2 overflow-hidden whitespace-nowrap select-none border-y border-gray-100 transition-colors duration-300">
 
         <div class="inline-block animate-marquee pause-on-hover">
-            <span class="px-4 text-sm font-sans">✨ Get 20% Off    Hello Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, possimus odio. Perspiciatis velit, eos earum ex neque excepturi voluptates accusamus iure sed aperiam alias illo at quaerat id, dolorum veniam?</span>
-            <span class="px-4 text-sm font-sans">✨ Get 20% Off    Hello Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, possimus odio. Perspiciatis velit, eos earum ex neque excepturi voluptates accusamus iure sed aperiam alias illo at quaerat id, dolorum veniam?</span>
+            <span class="px-4 text-sm font-sans">✨ Get 20% Off Hello Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Ex, possimus odio. Perspiciatis velit, eos earum ex neque excepturi voluptates accusamus iure sed
+                aperiam alias illo at quaerat id, dolorum veniam?</span>
+            <span class="px-4 text-sm font-sans">✨ Get 20% Off Hello Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Ex, possimus odio. Perspiciatis velit, eos earum ex neque excepturi voluptates accusamus iure sed
+                aperiam alias illo at quaerat id, dolorum veniam?</span>
         </div>
     </div>
 
